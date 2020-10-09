@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity"
+    tools:context=".LoginActivity"
     android:gravity="center_vertical"
     android:background="@color/colorAccent">
 
@@ -42,10 +42,9 @@
             android:layout_height="32dp"
             android:background="@color/colorWhite"
             android:gravity="center_vertical"
-            android:hint="Username"
+            android:hint="@string/username"
             android:paddingLeft="5dp"
-            android:inputType="TODO"
-            android:autofillHints="" />
+            android:inputType="text" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,9 +60,9 @@
             android:layout_weight="0.25"
             android:layout_height="32dp"
             android:gravity="center_vertical"
-            android:text="Password"
+            android:text="@string/password"
             android:textColor="@color/colorBlack"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp" />
         <EditText
             android:id="@+id/input_password"
             android:layout_width="0dp"
@@ -72,7 +71,8 @@
             android:background="@color/colorWhite"
             android:gravity="center_vertical"
             android:hint="Password"
-            android:paddingLeft="5dp"/>
+            android:paddingLeft="5dp"
+            android:inputType="textPassword" />
     </LinearLayout>
     <Button
         android:id="@+id/button_login"

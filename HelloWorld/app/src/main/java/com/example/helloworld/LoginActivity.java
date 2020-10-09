@@ -2,7 +2,6 @@ package com.example.helloworld;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,9 +9,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-    private static final String TAG = MainActivity.class.getSimpleName();
+    private static final String TAG = LoginActivity.class.getSimpleName();
     private EditText username;
     private EditText password;
     private Button loginbutton;
@@ -34,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void buttonclicked(){
         if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-            Intent homescreen = new Intent(MainActivity.this,Homescreen.class);
+            Intent homescreen = new Intent(LoginActivity.this, HomeActivity.class);
             Toast.makeText(getApplicationContext(), "Welcome " + username.getText(), Toast.LENGTH_LONG).show();
             startActivity(homescreen);
         } else {
