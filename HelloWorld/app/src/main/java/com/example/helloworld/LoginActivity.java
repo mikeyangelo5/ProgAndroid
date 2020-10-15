@@ -33,11 +33,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void buttonclicked(){
         if(username.getText().toString().equals("admin") && password.getText().toString().equals("admin")) {
-            Intent homescreen = new Intent(LoginActivity.this, HomeActivity.class);
+            startActivity(new Intent(this, HomeActivity.class));
             Toast.makeText(getApplicationContext(), "Welcome " + username.getText(), Toast.LENGTH_LONG).show();
-            startActivity(homescreen);
         } else {
             Toast.makeText(getApplicationContext(), "Username atau Password Tidak Benar ", Toast.LENGTH_LONG).show();
         }
+
     }
 }
