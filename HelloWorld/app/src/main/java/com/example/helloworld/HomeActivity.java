@@ -1,6 +1,7 @@
 package com.example.helloworld;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -19,6 +20,7 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        Log.i(TAG, "onCreate: Called");
         TabLayout tabLayout = findViewById(R.id.Tabs);
         TabItem tabItem1 = findViewById(R.id.First);
         TabItem tabItem2 = findViewById(R.id.Second);
