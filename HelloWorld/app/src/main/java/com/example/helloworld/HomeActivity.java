@@ -1,13 +1,12 @@
 package com.example.helloworld;
 
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
-import android.widget.FrameLayout;
 
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabItem;
@@ -24,6 +23,11 @@ public class HomeActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.Tabs);
         TabItem tabItem1 = findViewById(R.id.First);
         TabItem tabItem2 = findViewById(R.id.Second);
+
+        BroadcastsReceiver broadcastsReceiver = new BroadcastsReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.EXTRA_NO_CONNECTIVITY);
+        this.registerReceiver(broadcastsReceiver, filter); //aktif saat home act dijalankan
+
         final ViewPager viewPager = findViewById(R.id.FragmentsViewer);
 
         PagerAdapter pagerAdapter = new PagerAdapter(getSupportFragmentManager(), tabLayout.getTabCount());

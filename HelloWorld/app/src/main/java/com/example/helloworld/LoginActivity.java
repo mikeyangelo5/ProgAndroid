@@ -8,6 +8,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,6 +40,17 @@ public class LoginActivity extends AppCompatActivity {
         } else {
             Toast.makeText(getApplicationContext(), "Username atau Password Tidak Benar ", Toast.LENGTH_LONG).show();
         }
-
+        onNotificationBtnClicked();
+    }
+    private void onNotificationBtnClicked(){
+        String CHANNEL_ID = "MY_NOTIF_CHANNEL";
+        NotificationCompat.Builder builder = new NotificationCompat.Builder(this, "CHANNEL_ID")
+                .setSmallIcon(R.drawable.ic_launcher_background)
+                .setContentTitle("My Notification")
+                .setContentText("My Notification Content")
+                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(this);
+        int notificationID = 1;
+        notificationManagerCompat.notify(notificationID, builder.build());
     }
 }
