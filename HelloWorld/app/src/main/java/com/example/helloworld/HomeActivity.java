@@ -25,7 +25,7 @@ import com.google.android.material.tabs.TabLayout;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Switch wifiswitch;
+    private Switch wifiSwitch;
     private WifiManager wifiManager;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
@@ -64,78 +64,182 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
 
-        wifiswitch = findViewById(R.id.wifiSwitcher);
+//        wifiswitch = findViewById(R.id.wifiSwitcher);
+//        wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//
+//        initBroadcastReceiver();
+//
+//        if (wifiManager.isWifiEnabled()) {
+//            wifiswitch.setChecked(true);
+//            wifiswitch.setText("Wifi is on");
+//        } else {
+//            wifiswitch.setChecked(false);
+//            wifiswitch.setText("Wifi is Off");
+//        }
+//    }
+//    protected void onStart(){
+//        super.onStart();
+//        IntentFilter intentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
+//        registerReceiver(wifiStateReceiver, intentFilter);
+//    }
+//    protected void onStop() {
+//        super.onStop();
+//        unregisterReceiver(wifiStateReceiver);
+//    }
+//    BroadcastReceiver wifiStateReceiver = new BroadcastReceiver() {
+//        @Override
+//        public void onReceive(Context context, Intent intent) {
+//            int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN);
+//            switch (wifiState){
+//                case WifiManager.WIFI_STATE_ENABLED:
+//                    wifiswitch.setChecked(true);
+//                    wifiswitch.setText("Wifi ON");
+//                    notification("Connected");
+//                    break;
+//                case WifiManager.WIFI_STATE_DISABLED:
+//                    wifiswitch.setChecked(false);
+//                    wifiswitch.setText("Wifi OFF");
+//                    notification("Disconnected");
+//                    break;
+//            }
+//        }
+//    };
+//    public void notification(String message){
+//        String CHANNEL_ID = "NOTIFICATION";
+//        NotificationChannel notificationChannel = null;
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//            notificationChannel = new NotificationChannel(CHANNEL_ID, "notification", NotificationManager.IMPORTANCE_HIGH);
+//            NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+//            notificationManager.createNotificationChannel(notificationChannel);
+//            android.app.Notification notification1 = new NotificationCompat.Builder(this, CHANNEL_ID)
+//                    .setSmallIcon(R.drawable.notification)
+//                    .setContentTitle("WIFI")
+//                    .setContentText(message)
+//                    .build();
+//            int notificationID = 1;
+//            notificationManager.notify(notificationID, notification1);
+//        }
+//    }
+//    private void initBroadcastReceiver(){
+//        final WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//        wifiswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked && !wifiManager.isWifiEnabled()){
+//                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//                        Intent intent = new Intent(Settings.Panel.ACTION_WIFI);
+//                        HomeActivity.this.startActivityForResult(intent, 1);
+//                    } else {
+//                        wifiManager.setWifiEnabled(true);
+//                    }
+//                } else if(!isChecked && wifiManager.isWifiEnabled()){
+//                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+//                        Intent intent = new Intent(Settings.Panel.ACTION_WIFI);
+//                        HomeActivity.this.startActivityForResult(intent, 1);
+//                    } else {
+//                        wifiManager.setWifiEnabled(false);
+//                    }
+//                }
+//            }
+//        });
+        wifiSwitch = findViewById(R.id.wifiSwitcher);
         wifiManager = (WifiManager) getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+
+//        wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+//            @Override
+//            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+//                if(isChecked){
+//                    wifiManager.setWifiEnabled(true);
+//                    wifiSwitch.setText("Wifi is On");
+//                }
+//                else{
+//                    wifiManager.setWifiEnabled(false);
+//                    wifiSwitch.setText("Wifi is Off");
+//                }
+//            }
+//        });
 
         initBroadcastReceiver();
 
-        if (wifiManager.isWifiEnabled()) {
-            wifiswitch.setChecked(true);
-            wifiswitch.setText("Wifi is on");
-        } else {
-            wifiswitch.setChecked(false);
-            wifiswitch.setText("Wifi is Off");
+        if(wifiManager.isWifiEnabled()) {
+            wifiSwitch.setChecked(true);
+            wifiSwitch.setText("WiFi is On");
+        }
+        else{
+            wifiSwitch.setChecked(false);
+            wifiSwitch.setText("WiFi is Off");
         }
     }
+
+    private void hideTitleBar(){
+        if(getSupportActionBar() != null) {
+            getSupportActionBar().hide();
+        }
+    }
+
+    @Override
     protected void onStart(){
         super.onStart();
         IntentFilter intentFilter = new IntentFilter(WifiManager.WIFI_STATE_CHANGED_ACTION);
         registerReceiver(wifiStateReceiver, intentFilter);
     }
+
+    @Override
     protected void onStop() {
         super.onStop();
         unregisterReceiver(wifiStateReceiver);
     }
-    BroadcastReceiver wifiStateReceiver = new BroadcastReceiver() {
+
+    private BroadcastReceiver wifiStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
-            int wifiState = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN);
-            switch (wifiState){
+            int wifiStateExtra = intent.getIntExtra(WifiManager.EXTRA_WIFI_STATE, WifiManager.WIFI_STATE_UNKNOWN);
+            switch (wifiStateExtra){
                 case WifiManager.WIFI_STATE_ENABLED:
-                    wifiswitch.setChecked(true);
-                    wifiswitch.setText("Wifi ON");
-                    notification("Connected");
-                    break;
+                    wifiSwitch.setChecked(true);
+                    wifiSwitch.setText("WiFi is On");
+                    notification("WiFi Tersambung"); break;
                 case WifiManager.WIFI_STATE_DISABLED:
-                    wifiswitch.setChecked(false);
-                    wifiswitch.setText("Wifi OFF");
-                    notification("Disconnected");
-                    break;
+                    wifiSwitch.setChecked(false);
+                    wifiSwitch.setText("WiFi is Off");
+                    notification("WiFi Terputus"); break;
             }
         }
     };
+
     public void notification(String message){
-        String CHANNEL_ID = "NOTIFICATION";
-        NotificationChannel notificationChannel = null;
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-            notificationChannel = new NotificationChannel(CHANNEL_ID, "notification", NotificationManager.IMPORTANCE_HIGH);
+        String CHANNEL_ID = "NOTIF";
+        NotificationChannel mChannel = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            mChannel = new NotificationChannel(CHANNEL_ID, "NOTIF", NotificationManager.IMPORTANCE_HIGH);
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-            notificationManager.createNotificationChannel(notificationChannel);
-            android.app.Notification notification1 = new NotificationCompat.Builder(this, CHANNEL_ID)
+            notificationManager.createNotificationChannel(mChannel);
+            android.app.Notification notification = new NotificationCompat.Builder(HomeActivity.this, CHANNEL_ID)
                     .setSmallIcon(R.drawable.notification)
                     .setContentTitle("WIFI")
                     .setContentText(message)
                     .build();
             int notificationID = 1;
-            notificationManager.notify(notificationID, notification1);
+            notificationManager.notify(notificationID, notification);
         }
     }
-    private void initBroadcastReceiver(){
+
+    private void initBroadcastReceiver() {
         final WifiManager wifiManager = (WifiManager)getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-        wifiswitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        wifiSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked && !wifiManager.isWifiEnabled()){
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                        Intent intent = new Intent(Settings.Panel.ACTION_WIFI);
-                        HomeActivity.this.startActivityForResult(intent, 1);
+                if (isChecked && !wifiManager.isWifiEnabled()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_WIFI);
+                        HomeActivity.this.startActivityForResult(panelIntent, 1);
                     } else {
                         wifiManager.setWifiEnabled(true);
                     }
-                } else if(!isChecked && wifiManager.isWifiEnabled()){
-                    if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
-                        Intent intent = new Intent(Settings.Panel.ACTION_WIFI);
-                        HomeActivity.this.startActivityForResult(intent, 1);
+                } else if (!isChecked && wifiManager.isWifiEnabled()) {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        Intent panelIntent = new Intent(Settings.Panel.ACTION_WIFI);
+                        HomeActivity.this.startActivityForResult(panelIntent, 1);
                     } else {
                         wifiManager.setWifiEnabled(false);
                     }

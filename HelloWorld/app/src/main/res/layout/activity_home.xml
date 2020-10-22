@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="27dp">
+        tools:layout_editor_absoluteY="2dp">
 
         <com.google.android.material.tabs.TabItem
             android:id="@+id/First"
@@ -34,8 +34,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="4dp"
-        app:layout_constraintTop_toBottomOf="@+id/Tabs"
+        app:layout_constraintTop_toBottomOf="@+id/wifiSwitcher"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="0dp" />
 
@@ -43,8 +42,8 @@
         android:id="@+id/wifiSwitcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
+        app:layout_constraintTop_toBottomOf="@+id/Tabs"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="1dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
 </androidx.constraintlayout.widget.ConstraintLayout>
