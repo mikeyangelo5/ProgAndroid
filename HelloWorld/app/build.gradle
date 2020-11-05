@@ -4,6 +4,11 @@ android {
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
 
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
     defaultConfig {
         applicationId "com.example.helloworld"
         minSdkVersion 16
@@ -34,5 +39,5 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     implementation 'androidx.recyclerview:recyclerview:1.1.0'
-    implementation 'androidx.recyclerview:recyclerview-selection:1.1.0-rc03'
+    implementation 'androidx.cardview:cardview:1.0.0'
 }
