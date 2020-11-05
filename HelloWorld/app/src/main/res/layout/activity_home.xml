@@ -36,7 +36,9 @@
 
         app:layout_constraintTop_toBottomOf="@+id/wifiSwitcher"
         tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="0dp" />
+        tools:layout_editor_absoluteX="0dp" >
+
+    </androidx.viewpager.widget.ViewPager>
 
     <Switch
         android:id="@+id/wifiSwitcher"
@@ -46,4 +48,5 @@
         tools:ignore="MissingConstraints"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
