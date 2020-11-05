@@ -78,12 +78,6 @@ public class HomeActivity extends AppCompatActivity {
         }
     }
 
-    private void hideTitleBar(){
-        if(getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
-    }
-
     @Override
     protected void onStart(){
         super.onStart();
@@ -105,11 +99,11 @@ public class HomeActivity extends AppCompatActivity {
                 case WifiManager.WIFI_STATE_ENABLED:
                     wifiSwitch.setChecked(true);
                     wifiSwitch.setText("WiFi is On");
-                    notification("WiFi Tersambung"); break;
+                    notification("WiFi connected"); break;
                 case WifiManager.WIFI_STATE_DISABLED:
                     wifiSwitch.setChecked(false);
                     wifiSwitch.setText("WiFi is Off");
-                    notification("WiFi Terputus"); break;
+                    notification("WiFi disconnected"); break;
             }
         }
     };
