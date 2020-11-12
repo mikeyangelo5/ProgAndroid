@@ -12,6 +12,8 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.Switch;
 
@@ -27,6 +29,8 @@ public class HomeActivity extends AppCompatActivity {
 
     private Switch wifiSwitch;
     private WifiManager wifiManager;
+    private Button btnLogout;
+    LogInCheck loggedin;
 
     private static final String TAG = HomeActivity.class.getSimpleName();
     @Override
@@ -37,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
         TabLayout tabLayout = findViewById(R.id.Tabs);
         TabItem tabItem1 = findViewById(R.id.First);
         TabItem tabItem2 = findViewById(R.id.Second);
-
+        btnLogout = findViewById(R.id.btnlogout);
 //        BroadcastsReceiver broadcastsReceiver = new BroadcastsReceiver();
 //        IntentFilter filter = new IntentFilter(ConnectivityManager.EXTRA_NO_CONNECTIVITY);
 //        this.registerReceiver(broadcastsReceiver, filter); //aktif saat home act dijalankan
@@ -76,6 +80,15 @@ public class HomeActivity extends AppCompatActivity {
             wifiSwitch.setChecked(false);
             wifiSwitch.setText("WiFi is Off");
         }
+        loggedin = new LogInCheck(this);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                loggedin.saveSPBoolean(loggedin.LoggedIn, false);
+                startActivity(new Intent(HomeActivity.this, LoginActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK));
+                finish();
+            }
+        });
     }
 
     @Override
