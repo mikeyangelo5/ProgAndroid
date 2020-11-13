@@ -44,9 +44,20 @@
         android:id="@+id/wifiSwitcher"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/Tabs"
-        tools:ignore="MissingConstraints"
+        android:layout_marginTop="8dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Tabs"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/btnlogout"
+        android:layout_width="wrap_content"
+        android:layout_height="37dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginLeft="64dp"
+        android:text="Logout"
+        app:layout_constraintStart_toEndOf="@+id/wifiSwitcher"
+        app:layout_constraintTop_toBottomOf="@+id/Tabs" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
